@@ -1,5 +1,5 @@
-from openai import OpenAI
-from app.config import settings
+from openai import AuthenticationError, OpenAI
+from app.config import ensure_api_key, settings
 from app.tool_calls import TOOL_DEFINITIONS, execute_tool_call
 
 
@@ -7,8 +7,23 @@ class OpenAIProvider:
     def __init__(self):
         if not settings.api_key:
             raise ValueError("OPENAI_API_KEY is not set")
-        self.client = OpenAI(api_key=settings.api_key)
         self.model = settings.model
+        self.client = OpenAI(api_key=settings.api_key)
+
+    def _rebuild_client(self) -> None:
+        if not settings.api_key:
+            raise ValueError("OPENAI_API_KEY is not set")
+        self.client = OpenAI(api_key=settings.api_key)
+
+    def _create_chat_completion(self, **kwargs):
+        try:
+            return self.client.chat.completions.create(**kwargs)
+        except AuthenticationError:
+            api_key = ensure_api_key(force_prompt=True)
+            if not api_key:
+                raise
+            self._rebuild_client()
+            return self.client.chat.completions.create(**kwargs)
 
     def generate(self, prompt: str, system: str = "", tools: list = None) -> dict:
         messages = [
@@ -20,7 +35,7 @@ class OpenAIProvider:
         if tools:
             kwargs["tools"] = tools
         
-        response = self.client.chat.completions.create(**kwargs)
+        response = self._create_chat_completion(**kwargs)
         
         usage = response.usage
         tokens_in = usage.prompt_tokens if usage else 0
@@ -66,7 +81,7 @@ class OpenAIProvider:
             if tools:
                 kwargs["tools"] = tools
             
-            response = self.client.chat.completions.create(**kwargs)
+            response = self._create_chat_completion(**kwargs)
             choice = response.choices[0]
             message = choice.message
             
@@ -107,7 +122,7 @@ class OpenAIProvider:
         }
 
     def stream(self, prompt: str, system: str = ""):
-        stream = self.client.chat.completions.create(
+        stream = self._create_chat_completion(
             model=self.model,
             messages=[
                 {"role": "system", "content": system},

@@ -1,5 +1,6 @@
 from langgraph.graph import StateGraph, START, END
 from rich import print
+from rich.markdown import Markdown
 
 from app.state import AgentState
 from app.models import OpenAIProvider
@@ -40,6 +41,11 @@ When user asks something that matches a skill, suggest using:
     tokens_in = result["tokens_in"]
     tokens_out = result["tokens_out"]
     cost = calculate_cost(settings.model, tokens_in, tokens_out)
+
+    if text.strip():
+        print()
+        print("[bold green]Assistant:[/bold green]")
+        print(Markdown(text))
 
     print(f"\n[dim]Tokens: {tokens_in} in / {tokens_out} out | Cost: ${cost:.6f} | Model: {settings.model}[/dim]")
 
