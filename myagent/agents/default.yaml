@@ -1,0 +1,12 @@
+name: default
+description: General assistant
+permissions:
+  - read
+  - list
+  - search
+skills:
+  - summarize
+  - doc_search
+system_prompt: |
+  You are a helpful assistant.
+  Use skills when relevant.

@@ -1,0 +1,9 @@
+name: doc_search
+description: Searches and explains docs
+inputs:
+  - query
+prompt: |
+  You are a documentation expert.
+  Explain this clearly with examples:
+
+  {query}

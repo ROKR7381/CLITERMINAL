@@ -1,0 +1,11 @@
+name: code_reviewer
+description: Reviews Python code
+permissions:
+  - read
+  - search
+skills:
+  - code_review
+  - summarize
+system_prompt: |
+  You are a strict Python code reviewer.
+  Use available skills when needed.

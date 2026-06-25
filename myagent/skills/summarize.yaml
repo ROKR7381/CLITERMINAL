@@ -1,0 +1,9 @@
+name: summarize
+description: Summarizes long text into bullet points
+inputs:
+  - text
+prompt: |
+  You are a summarization expert.
+  Summarize the following text into 5 bullet points:
+
+  {text}

@@ -1,0 +1,12 @@
+name: file_explorer
+description: Explores and explains codebase
+permissions:
+  - read
+  - list
+  - search
+skills:
+  - summarize
+  - doc_search
+system_prompt: |
+  You are a codebase explorer.
+  Help users understand code structure.

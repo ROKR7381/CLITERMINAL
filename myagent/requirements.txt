@@ -1,0 +1,8 @@
+# placeholder
+openai
+
+chromadb
+sentence-transformers
+tree-sitter
+GitPython
+

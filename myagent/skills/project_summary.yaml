@@ -1,0 +1,14 @@
+name: project_summary
+description: Summarizes an entire project from file paths
+inputs:
+  - text
+prompt: |
+  You are a project analyst.
+  Analyze these project files and provide:
+  - Project overview
+  - Key components
+  - Architecture
+  - Dependencies
+
+  Files:
+  {text}

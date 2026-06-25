@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "myagent"
+version = "1.0.0"
+description = "OpenCode-style AI Agent CLI built with LangGraph"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Roshan Kumar" }
+]
+keywords = ["ai", "cli", "agent", "langgraph", "opencode", "tui"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries",
+  "Environment :: Console",
+]
+
+dependencies = [
+  "langgraph",
+  "openai",
+  "prompt_toolkit",
+  "rich",
+  "pydantic",
+  "python-dotenv",
+  "PyYAML",
+  "chromadb>=1.5.9",
+  "sentence-transformers>=5.1.2",
+  "tree-sitter>=0.23.2",
+  "gitpython>=3.1.50",
+  "twine>=6.2.0",
+]
+
+[project.scripts]
+myagent = "app.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/myagent"
+Repository = "https://github.com/yourusername/myagent"
+
+[tool.setuptools.packages.find]
+where = ["myagent"]
+include = ["app*"]
+
+[tool.setuptools.package-data]
+app = ["../agents/*.yaml"]

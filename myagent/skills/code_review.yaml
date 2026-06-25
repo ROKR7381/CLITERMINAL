@@ -1,0 +1,13 @@
+name: code_review
+description: Reviews Python code for bugs and improvements
+inputs:
+  - code
+prompt: |
+  You are a strict Python code reviewer.
+  Review this code and provide:
+  - Bugs
+  - Improvements
+  - Security issues
+
+  Code:
+  {code}

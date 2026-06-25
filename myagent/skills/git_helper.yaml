@@ -1,0 +1,9 @@
+name: git_helper
+description: Helps generate git commit messages
+inputs:
+  - diff
+prompt: |
+  You are a Git expert.
+  Generate a clean commit message for this diff:
+
+  {diff}
