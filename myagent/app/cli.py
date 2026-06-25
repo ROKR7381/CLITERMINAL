@@ -11,7 +11,7 @@ from app.sessions import save_session, load_session, list_sessions
 from app.agents import load_agent, list_agents
 from app.tools import read_file, write_file, list_dir, run_shell, search_text
 from app.permissions import is_allowed
-from app.config import settings, AVAILABLE_MODELS
+from app.config import settings, AVAILABLE_MODELS, ensure_api_key
 
 console = Console()
 
@@ -387,6 +387,7 @@ def handle_command(cmd: str, state: dict) -> bool:
 
 
 def interactive():
+    ensure_api_key()
     show_banner()
 
     from app.context import scan_repo
