@@ -42,8 +42,28 @@ fi
 echo ""
 echo "✅ myagent installed successfully!"
 echo ""
-echo "👉 Run:"
-echo "   myagent"
-echo "   myagent tui"
-echo "   myagent run 'hello'"
+
+# 4. Check API key
+if [ -z "$OPENAI_API_KEY" ]; then
+    echo ""
+    echo "⚠️  OPENAI_API_KEY not set!"
+    echo ""
+    echo "👉 Get your OpenAI API key here:"
+    echo "   https://platform.openai.com/api-keys"
+    echo ""
+    echo "👉 Then run this in your shell:"
+    echo '   export OPENAI_API_KEY="sk-your-key-here"'
+    echo '   # Add to ~/.bashrc or ~/.zshrc to persist:'
+    echo '   echo "export OPENAI_API_KEY=\"sk-your-key-here\"" >> ~/.bashrc'
+    echo ""
+    echo "👉 Restart terminal, then run:"
+    echo "   myagent"
+else
+    echo "✅ API key detected"
+    echo ""
+    echo "🎉 Run:"
+    echo "   myagent"
+    echo "   myagent tui"
+    echo "   myagent run 'hello'"
+fi
 echo ""

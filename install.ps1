@@ -42,8 +42,27 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host ""
 Write-Host "✅ myagent installed successfully!" -ForegroundColor Green
 Write-Host ""
-Write-Host "👉 Run:"
-Write-Host "   myagent"
-Write-Host "   myagent tui"
-Write-Host "   myagent run 'hello'"
+
+# 4. Check API key
+$apiKey = [Environment]::GetEnvironmentVariable("OPENAI_API_KEY", "User")
+if (-not $apiKey) {
+    Write-Host ""
+    Write-Host "⚠️  OPENAI_API_KEY not set!" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "👉 Get your OpenAI API key here:"
+    Write-Host "   https://platform.openai.com/api-keys"
+    Write-Host ""
+    Write-Host "👉 Then run this in PowerShell:"
+    Write-Host '   setx OPENAI_API_KEY "sk-your-key-here"'
+    Write-Host ""
+    Write-Host "👉 Close terminal and reopen, then run:"
+    Write-Host "   myagent"
+} else {
+    Write-Host "✅ API key detected"
+    Write-Host ""
+    Write-Host "🎉 Run:"
+    Write-Host "   myagent"
+    Write-Host "   myagent tui"
+    Write-Host "   myagent run 'hello'"
+}
 Write-Host ""
